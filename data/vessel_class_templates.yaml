@@ -1,0 +1,1425 @@
+Tanker:
+  metadata:
+    vessel_type: Tanker
+    length_m:
+      uniform_range:
+        - 70.0
+        - 333.0
+    beam_m:
+      uniform_range:
+        - 27.0
+        - 70.0
+    call_sign:
+      one_of:
+        - 9HA5579
+        - VRTK7
+        - V7A5571
+        - A8VC7
+        - D5ON4
+        - 8PXO6
+        - 8P2448
+        - V7KA2
+        - V7A5009
+        - V7A5670
+        - D5MB4
+        - D5MC4
+        - D5SS7
+        - D5WO6
+    owner:
+      one_of:
+        - CATALINA SHIPPING SA
+        - SUN MARITIME & TRADING INC
+        - FOLEGANDROS MARITIME CO
+        - CARRIER TANKER INC
+        - ST FANOURIOS CO LTD
+        - BALTIC WIND
+        - KALSOY SHIPPING LTD
+        - OPTASIA INC
+        - ARETHUSA SHIPPING CORP
+        - DOLPHIN MARITIME & TRADING-MAI
+        - NAZ MARITIME & TRADING INC
+        - SUPER SHIPPING CORP
+        - MYRTLE MARINE INC
+        - IRMA CORP
+    manager:
+      one_of:
+        - SUN SHIP MANAGEMENT
+        - BEKS GEMI ISLETMECILIGI VE TIC
+        - NAVIOS TANKERS MANAGEMENT INC
+        - INTERNATIONAL MARITIME ENT
+        - EASTERN MEDITERRANEAN MTME-LIE
+        - NORIENT PRODUCT POOL APS
+        - STEALTH MARITIME CORP SA
+        - KYKLADES MARITIME CORP
+        - MAERSK TANKERS MR K/S
+    ism_manager:
+      one_of:
+        - SUN SHIP MANAGEMENT
+        - THENAMARIS SHIPS MANAGEMENT
+        - BERNHARD SCHULTE SHIPPING
+        - BERNHARD SCHULTE-CHR
+        - EASTERN MEDITERRANEAN MTME-LIE
+        - NSB NIEDERELBE SCHIFFAHRTSGES
+        - STEALTH MARITIME CORP SA
+        - KYKLADES MARITIME CORP
+        - V SHIPS ASIA GROUP PTE LTD
+        - FLEET MANAGEMENT LTD-HKG
+    mmsi:
+      one_of:
+        - 229738000
+        - 477594500
+        - 538010082
+        - 636014590
+        - 636018177
+        - 249884000
+        - 314840000
+        - 314950000
+        - 538002594
+        - 538008311
+        - 538009661
+        - 538010143
+        - 636017648
+        - 636017656
+        - 636019054
+        - 636019874
+    vessel_name:
+      one_of:
+        - SEADUCHESS
+        - ASPHALT HONOR
+        - BEKS SUN
+        - Folegandros
+        - Scf Amur
+        - AGIOS FANOURIOS I
+        - SIREN
+        - ZENITH
+        - T Rex
+        - NISSOS KEROS
+        - BEKS EBRU
+        - BEKS NAZ
+        - Scf Don
+        - Zaliv Amerika
+        - Vernadsky Prospect
+        - KARADENIZ POWERSHIP ANATOLIA
+    imo:
+      one_of:
+        - 9876440
+        - 9288382
+        - 9265756
+        - 9247560
+        - 9333436
+        - 9759824
+        - 9261401
+        - 9610781
+        - 9337327
+        - 9856074
+        - 9308132
+        - 9263198
+        - 9385142
+        - 9354301
+        - 9843560
+        - 9286023
+  kinematics:
+    min_speed_kn: 5
+    max_speed_kn: 16
+    cruise_speed_kn: 12
+    accel_kn_per_min: 0.8
+    decel_kn_per_min: 1.2
+    max_turn_deg_per_s: 0.25
+  emitter_profile:
+    one_of:
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, nav_radar_s_band, satcom_maritime_c_ku]
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, satcom_maritime_c_ku]
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, nav_radar_s_band]
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band]
+Offshore Support Vessel:
+  metadata:
+    vessel_type: Offshore Support Vessel
+    # small/medium OSV size band
+    length_m:
+      uniform_range: [60.0, 90.0]
+    beam_m:
+      uniform_range: [15.0, 23.0]
+    # Call signs shaped like common flag states (Marshall Is. V7…, Malta 9H…, Liberia A8…, Panama 3E…)
+    call_sign:
+      one_of:
+        - V7KQ8
+        - 9HAF6
+        - A8VQ3
+        - 3EBC4
+        - V7XJ5
+    # Fictional owners/managers that sound like OSV operators
+    owner:
+      one_of:
+        - NordSea Offshore AS
+        - Aurora Marine Services Pte Ltd
+        - BlueRig Support BV
+        - Gulf Horizon Marine LLC
+    manager:
+      one_of:
+        - Caravel OSV Management Ltd
+        - Atlas Subsea Operations Inc
+        - Meridian Offshore Logistics Pte Ltd
+        - Polar Tide Marine BV
+    ism_manager:
+      one_of:
+        - Deepwater Compliance & Safety Ltd
+        - Oceanline Technical Services Inc
+        - North Atlantic ISM Solutions AS
+    # MMSIs with plausible MIDs (Norway 257, Singapore 563, Marshall Is. 538, UK 235, Malta 248)
+    mmsi:
+      one_of:
+        - 257345210
+        - 563012945
+        - 538009876
+        - 235110987
+        - 248765432
+    # Typical OSV naming patterns
+    vessel_name:
+      one_of:
+        - OCEAN SENTINEL
+        - NORDIC PIONEER
+        - SEA RANGER
+        - PACIFIC ENDEAVOUR
+        - ATLANTIC SUPPORT
+    # Keep your existing one and add a couple of synthetic IMOs (format‑correct; no checksum enforcement here)
+    imo:
+      one_of:
+        - 9396854
+        - 9712345
+        - 9845672
+  kinematics:
+    # OSVs often cruise 10–15 kn; allow up to ~18–20 for fast supply runs
+    min_speed_kn: 3
+    max_speed_kn: 20
+    cruise_speed_kn: 12
+    accel_kn_per_min: 1.5
+    decel_kn_per_min: 2.0
+    max_turn_deg_per_s: 0.8
+  emitter_profile:
+    one_of:
+      # Full fit: AIS, VHF, both radars, satcom
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, nav_radar_s_band, satcom_maritime_c_ku]
+      # Drop S-band for lighter nav fit
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, satcom_maritime_c_ku]
+      # Keep both radars but no satcom
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, nav_radar_s_band]
+      # Minimal: AIS, VHF, X-band
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band]
+Chemical/Oil Products Tanker:
+  metadata:
+    vessel_type: Chemical/Oil Products Tanker
+    length_m:
+      uniform_range:
+        - 70.0
+        - 188.0
+    beam_m:
+      uniform_range:
+        - 23.0
+        - 70.0
+    call_sign:
+      one_of:
+        - BOWK9
+        - UENV
+        - VRTA3
+        - VRTG3
+        - BOVT2
+        - V7A4477
+        - UCSB
+        - 3ETW4
+        - HP7673
+        - VRTJ3
+        - V7MJ8
+        - 5LHE2
+    owner:
+      one_of:
+        - NANJING YANGYANG CHEMICAL
+        - ROSWELL ARCTIC LLC
+        - AGROTEK-TM LLC
+        - OCEAN STARLIGHT LTD
+    manager:
+      one_of:
+        - NANJING YANGYANG CHEMICAL
+        - ROSWELL ARCTIC LLC
+        - VALKUR LLC
+        - OCEAN STARLIGHT LTD
+    ism_manager:
+      one_of:
+        - NANJING YANGYANG CHEMICAL
+        - ROSWELL ARCTIC LLC
+        - VALKUR LLC
+        - CHEMUL SHIPS MANAGEMENT CO LTD
+    mmsi:
+      one_of:
+        - 413319110
+        - 273436640
+        - 477410300
+        - 477615500
+        - 413316440
+        - 538009225
+        - 273414670
+        - 371176000
+        - 371997000
+        - 477591900
+        - 538006405
+        - 636022096
+    vessel_name:
+      one_of:
+        - NING HUA 431
+        - CILICIA
+        - DONGLI
+        - GREENER VI
+        - LING YU
+        - WEALTHY LOYAL
+        - ANDREY PERVOZVANNIY
+        - PK PHOENIX
+        - EXUBERANT STAR
+        - Win Sino
+        - Hanson
+        - LARA I
+    imo:
+      one_of:
+        - 9885221
+        - 9171175
+        - 9262584
+        - 9232022
+        - 9635987
+        - 9637650
+        - 9255268
+        - 9326902
+        - 9127667
+        - 9278519
+        - 9133070
+        - 9231767
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 17
+    cruise_speed_kn: 13
+    accel_kn_per_min: 1.0
+    decel_kn_per_min: 1.5
+    max_turn_deg_per_s: 0.30
+  emitter_profile:
+    one_of:
+      # Full commercial fit
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, nav_radar_s_band, satcom_maritime_c_ku]
+      # Common fit (drop S-band)
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, satcom_maritime_c_ku]
+      # Heavy nav (both radars), no satcom
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, nav_radar_s_band]
+      # Minimal under-way set
+      - [ais_class_a, nav_radar_x_band]
+      # With low-duty maintenance uplink
+      - [ais_class_a, vhf_marine_bridge, nav_radar_x_band, satcom_maritime_c_ku, arpa_tracking_uplink]
+Crude Oil Tanker:
+  metadata:
+    vessel_type: Crude Oil Tanker
+    length_m:
+      uniform_range:
+        - 70.0
+        - 333.0
+    beam_m:
+      uniform_range:
+        - 32.0
+        - 60.0
+    call_sign:
+      one_of:
+        - DDVQ2
+        - 3FGV3
+        - 5LIB5
+        - D5WZ5
+        - V3MD7
+        - 3E2460
+        - 3E4025
+        - 3E5814
+        - 3E2027
+        - V7DH8
+        - V7RD3
+        - TJM0033
+        - A8HG4
+        - 5LBN2
+    owner:
+      one_of:
+        - HECTAR SHIPPING INC
+        - VENFLEET LTD
+        - KERUN INTERNATIONAL TRADING CO
+        - SILVER COAST INC
+        - WEALTHY CARRIER LTD
+        - CLYDE CHARTERING INC
+        - ELEGANT SHIP MANAGEMENT FZC
+        - ARGO SHIPPING LLC
+        - GRAT SHIPPING CO LTD
+        - FORMOSA HONOR MARINE CORP
+    manager:
+      one_of:
+        - NITC
+        - PDV MARINA SA
+        - EAST ENGLAND SHIPPING LTD
+        - VANGUARD MARINE VENTURES INC
+        - SINO SHIP MANAGEMENT CO LTD
+        - LAGOSMARINE LTD
+        - GRIT SHIP MANAGEMENT PVT LTD
+        - WESTPORT TANKERS SA
+        - GRAT SHIPPING CO LTD
+        - FORMOSA PLASTICS MARINE CORP
+    ism_manager:
+      one_of:
+        - NITC
+        - EAST ENGLAND SHIPPING LTD
+        - VANGUARD MARINE VENTURES INC
+        - SINO SHIP MANAGEMENT CO LTD
+        - LAGOSMARINE LTD
+        - GRIT SHIP MANAGEMENT PVT LTD
+        - WESTPORT TANKERS SA
+        - LUMUS CHARTERING LTD
+        - FORMOSA PLASTICS MARINE CORP
+    mmsi:
+      one_of:
+        - 422222000
+        - 352269000
+        - 636022290
+        - 636019961
+        - 312242000
+        - 352001103
+        - 352001281
+        - 352003707
+        - 352898733
+        - 538001641
+        - 538003480
+        - 613769400
+        - 636013971
+        - 636016228
+        - 636020946
+    vessel_name:
+      one_of:
+        - Henna
+        - Icaro
+        - VULA
+        - YIO
+        - VESNA
+        - SUPER EVER
+        - ARC 1
+        - NICHOLE
+        - CLYDE NOBLE
+        - Maria Grace
+        - Aspasia Lemos
+        - ATILA
+        - FPMC C HONOR
+        - Despina Andrianna
+        - AFRA CROWN
+    imo:
+      one_of:
+        - 9212929
+        - 9038842
+        - 9176761
+        - 9328716
+        - 9233349
+        - 9277761
+        - 9268112
+        - 9332822
+        - 9282792
+        - 9224271
+        - 9417464
+        - 9262754
+        - 9337195
+        - 9182667
+        - 9273052
+  kinematics:
+    min_speed_kn: 5
+    max_speed_kn: 16
+    cruise_speed_kn: 12
+    accel_kn_per_min: 0.7
+    decel_kn_per_min: 1.2
+    max_turn_deg_per_s: 0.20
+emitter_profile:
+  one_of:
+    - ais_class_a
+    - vhf_marine_bridge
+    - nav_radar_x_band
+    - nav_radar_s_band
+    - satcom_maritime_c_ku
+    - arpa_tracking_uplink
+Product Carrier:
+  metadata:
+    vessel_type: Product Carrier
+    length_m:
+      uniform_range:
+        - 70.0
+        - 277.0
+    beam_m:
+      uniform_range:
+        - 40.0
+        - 50.0
+    call_sign:
+      one_of:
+        - 3EER8
+        - 3EWZ7
+        - 3FKJ6
+        - 3EUN6
+        - 3FOK3
+        - 3FFK2
+    owner:
+      one_of:
+        - ARAB MARITIME PETROLEUM TRANS
+    manager:
+      one_of:
+        - ARAB MARITIME PETROLEUM TRANS
+    ism_manager:
+      one_of:
+        - ARAB MARITIME PETROLEUM TRANS
+    mmsi:
+      one_of:
+        - 372119000
+        - 351354000
+        - 373594000
+        - 374007000
+        - 354536000
+        - 372616000
+    vessel_name:
+      one_of:
+        - Breeze
+        - Sea Icon
+        - Sea Star
+        - Sea Beauty
+        - Star Energy
+        - Aldana
+    imo:
+      one_of:
+        - 9809356
+        - 9806615
+        - 9607710
+        - 9806627
+        - 9773935
+        - 9809368
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 19
+    cruise_speed_kn: 14
+    accel_kn_per_min: 1.2
+    decel_kn_per_min: 1.8
+    max_turn_deg_per_s: 0.35
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+LPG Tanker:
+  metadata:
+    vessel_type: LPG Tanker
+    length_m:
+      uniform_range:
+        - 70.0
+        - 333.0
+    beam_m:
+      uniform_range:
+        - 17.0
+        - 70.0
+    call_sign:
+      one_of:
+        - HPLV
+        - J2JJ
+        - 5LEG5
+        - H3PW
+        - 3ENN5
+        - 3FDC2
+        - H3OH
+        - XVLH7
+        - TJMC902
+        - D6A2739
+        - ELYD2
+    owner:
+      one_of:
+        - THIEN AN HOA BINH CO LTD
+        - XIDI SHIPPING LTD
+        - VIETMY TRANS CO LTD
+        - YU HONG DE CO LTD
+        - GREAT SAIL SHIPPING LTD
+    manager:
+      one_of:
+        - THIEN AN HOA BINH CO LTD
+        - XIDI SHIPPING LTD
+        - VIETMY TRANS CO LTD
+        - YU HONG DE CO LTD
+        - MARINENET SHIPPING CO LTD
+    ism_manager:
+      one_of:
+        - GOLDEN SHIPS MANAGEMENT CO LTD
+        - VIETMY TRANS CO LTD
+        - NIRVANA SHIPPING LTD
+        - MARINENET SHIPPING CO LTD
+    mmsi:
+      one_of:
+        - 373502000
+        - 621819052
+        - 636021504
+        - 351529000
+        - 353285000
+        - 357862000
+        - 372247000
+        - 574005710
+        - 613490000
+        - 620739000
+        - 636011290
+    vessel_name:
+      one_of:
+        - Kailash Gas
+        - G SPRING
+        - XIDI
+        - GAS VISION
+        - NEXO
+        - ARROW
+        - GAS MARTA
+        - GLOBAL LIBERTY
+        - SEA OPERA
+        - CAPE GAS
+        - Navigator Neptune
+    imo:
+      one_of:
+        - 9002908
+        - 9040118
+        - 9294290
+        - 9115303
+        - 9014456
+        - 9127033
+        - 9307748
+        - 9350288
+        - 9000883
+        - 9002491
+        - 9177583
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 20
+    cruise_speed_kn: 15
+    accel_kn_per_min: 1.2
+    decel_kn_per_min: 1.8
+    max_turn_deg_per_s: 0.40
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+Oil Products Tanker:
+  metadata:
+    vessel_type: Oil Products Tanker
+    length_m:
+      uniform_range:
+        - 70.0
+        - 275.0
+    beam_m:
+      uniform_range:
+        - 32.0
+        - 48.0
+    call_sign:
+      one_of:
+        - 3FEH7
+        - 3E6743
+        - V7A5371
+        - J2JT
+        - 5LGB9
+    owner:
+      one_of:
+        - YONG TAI SHIPPING LTD
+        - NEPTUN D SHIPPING MANAGEMENT
+        - LIBERTY MARITIME LTD
+        - CONCORD TANKERS INC
+        - SANFORD SHIPPING LTD
+    manager:
+      one_of:
+        - ZHIYUAN INTERNATIONAL SHIP
+        - REEDEREI NORD BV
+        - PRIME TANKER MANAGEMENT INC
+        - HARBOUR SHIP MANAGEMENT LTD
+        - BERNHARD SCHULTE-IND
+    ism_manager:
+      one_of:
+        - ZHIYUAN INTERNATIONAL SHIP
+        - REEDEREI NORD BV
+        - PRIME TANKER MANAGEMENT INC
+        - BERNHARD SCHULTE-IND
+    mmsi:
+      one_of:
+        - 355784000
+        - 352004446
+        - 538009942
+        - 621819060
+        - 636021868
+    vessel_name:
+      one_of:
+        - YONG TAI
+        - FAIR WORLD
+        - LIBERTY
+        - BOCEANICA
+        - LILA GUANGZHOU
+    imo:
+      one_of:
+        - 9231511
+        - 9277773
+        - 9433016
+        - 9267132
+        - 9259733
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 18
+    cruise_speed_kn: 14
+    accel_kn_per_min: 1.1
+    decel_kn_per_min: 1.6
+    max_turn_deg_per_s: 0.35
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+Semi-Submersible:
+  metadata:
+    vessel_type: Semi-Submersible
+    length_m:
+      uniform_range:
+        - 150.0
+        - 160.0
+    beam_m:
+      uniform_range:
+        - 35.0
+        - 38.0
+    call_sign:
+      one_of:
+        - 3FAK2
+    owner:
+      one_of:
+        - WISH WAY GLOBAL SHIPPING CORP
+    manager:
+      one_of:
+        - CCCC INTERNATIONAL SHPG CORP
+    ism_manager:
+      one_of:
+        - CCCC INTERNATIONAL SHPG CORP
+    mmsi:
+      one_of:
+        - 371578000
+    vessel_name:
+      one_of:
+        - Wish Way
+    imo:
+      one_of:
+        - 9578531
+  kinematics:
+    min_speed_kn: 3
+    max_speed_kn: 14
+    cruise_speed_kn: 10
+    accel_kn_per_min: 0.5
+    decel_kn_per_min: 0.8
+    max_turn_deg_per_s: 0.15
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+Fishing Vessel:
+  metadata:
+    vessel_type: Fishing Vessel
+    call_sign:
+      one_of:
+        - BZUW6
+        - BZ6US
+        - BZUX4
+        - BZUX9
+        - BZU7U
+        - BZU5V
+        - BVYZ7
+        - BVZA7
+        - BZUX5
+        - BZUX7
+        - BZU8U
+        - BZU2V
+        - BZU4V
+        - BZU6V
+        - BZU4W
+        - BZU5W
+        - BZU6W
+        - BZ6UQ
+        - BZ9VO
+        - BZ3VQ
+        - BZ4VQ
+        - BZ7US
+        - BVZC7
+        - BZUA4
+        - BZUX6
+        - BZUX8
+        - BZVL8
+        - BZUW4
+        - BZU2U
+        - BZU9U
+        - BZU1V
+        - BZU3V
+        - BZU2W
+        - BZW9S
+        - BZW2T
+        - BZW4T
+        - BZW6T
+        - BZW7T
+        - BZW9T
+        - BZ5UR
+        - BZ5UQ
+        - BZUA5
+        - BZ1VQ
+    owner:
+      one_of:
+        - FUJIAN PINGTAN COUNTY OCEAN
+        - FUZHOU HONGLONG OCEAN FISHING
+    manager:
+      one_of:
+        - FUJIAN PINGTAN COUNTY OCEAN
+        - FUZHOU HONGLONG OCEAN FISHING
+    ism_manager:
+      one_of: []
+    mmsi:
+      one_of:
+        - 412440696
+        - 412440779
+        - 412440029
+        - 412440673
+        - 412440678
+        - 412440744
+        - 412440752
+        - 412440555
+        - 412440556
+        - 412440674
+        - 412440676
+        - 412440745
+        - 412440748
+        - 412440751
+        - 412440753
+        - 412440758
+        - 412440759
+        - 412440761
+        - 412440795
+        - 412549389
+        - 412549393
+        - 412549394
+        - 412440031
+        - 412440554
+        - 412440606
+        - 412440675
+        - 412440677
+        - 412440686
+        - 412440694
+        - 412440738
+        - 412440746
+        - 412440747
+        - 412440749
+        - 412440756
+        - 412440769
+        - 412440771
+        - 412440772
+        - 412440773
+        - 412440775
+        - 412440776
+        - 412440778
+        - 412440792
+        - 412440794
+        - 412445885
+        - 412549387
+        - 412549388
+        - 412549391
+    vessel_name:
+      one_of:
+        - FU YUAN YU 8660
+        - MIN XIA YU YUN72007
+        - FU YUAN YU 557
+        - FU YUAN YU 7894
+        - FU YUAN YU 7899
+        - FU YUAN YU 8679
+        - FU YUAN YU 8686
+        - FU YUAN YU 7882
+        - FU YUAN YU 7883
+        - FU YUAN YU 7895
+        - FU YUAN YU 7897
+        - FU YUAN YU 8680
+        - FU YUAN YU 8683
+        - FU YUAN YU 8685
+        - FU YUAN YU 8687
+        - FU YUAN YU 8691
+        - FU YUAN YU 8692
+        - FU YUAN YU 8693
+        - FU YUAN YU 8698
+        - FU YUAN YU 8650
+        - FU YUAN YU 8653
+        - FU YUAN YU 8654
+        - FU YUAN YU 558
+        - FU YUAN YU 7864
+        - FU YUAN YU 7886
+        - FU YUAN YU 7896
+        - FU YUAN YU 7898
+        - FU YUAN YU 8678
+        - FU YUAN YU 7901
+        - FU YUAN YU 7615
+        - FU YUAN YU 8681
+        - FU YUAN YU 8682
+        - FU YUAN YU 8684
+        - FU YUAN YU 8689
+        - FU YUAN YU 7620
+        - FU YUAN YU 7621
+        - FU YUAN YU 7622
+        - FU YUAN YU 7624
+        - FU YUAN YU 7626
+        - FU YUAN YU 7627
+        - FU YUAN YU 7629
+        - FU YUAN YU 8695
+        - FU YUAN YU 8697
+        - FU YUAN YU 7887
+        - FU YUAN YU 8648
+        - FU YUAN YU 8649
+        - FU YUAN YU 8651
+    imo:
+      one_of:
+        - 9870111
+        - 9914785
+        - 8820509
+        - 9871232
+        - 9872286
+        - 9892365
+        - 9894399
+        - 9828754
+        - 9828766
+        - 9871244
+        - 9872262
+        - 9892377
+        - 9894387
+        - 9894507
+        - 9894519
+        - 9899088
+        - 9899105
+        - 9899117
+        - 9916721
+        - 9940552
+        - 9940617
+        - 9940629
+        - 9031947
+        - 9828687
+        - 9842293
+        - 9872224
+        - 9872274
+        - 9870240
+        - 9888285
+        - 9896347
+        - 9893137
+        - 9893149
+        - 9894492
+        - 9899064
+        - 9914577
+        - 9914589
+        - 9914591
+        - 9914606
+        - 9914735
+        - 9914747
+        - 9914761
+        - 9916692
+        - 9916707
+        - 9842308
+        - 9940538
+        - 9940540
+        - 9940576
+  kinematics:
+    min_speed_kn: 2
+    max_speed_kn: 14
+    cruise_speed_kn: 8
+    accel_kn_per_min: 1.5
+    decel_kn_per_min: 2.0
+    max_turn_deg_per_s: 1.0
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - fishing_sonar
+      - echo_sounder
+Fish Carrier:
+  metadata:
+    vessel_type: Fish Carrier
+    call_sign:
+      one_of:
+        - BZQL5
+        - BMJR6
+        - BQTX3
+        - BRTK8
+        - BHLF7
+    owner:
+      one_of:
+        - FUJIAN PINGTAN COUNTY OCEAN
+        - FUZHOU HONGLONG OCEAN FISHING
+    manager:
+      one_of:
+        - FUJIAN PINGTAN COUNTY OCEAN
+        - FUZHOU HONGLONG OCEAN FISHING
+        - XIAMEN BLUEWATER SHIP MANAGEMENT CO
+        - QUANZHOU DEEPSEA LOGISTICS LTD
+    ism_manager:
+      one_of:
+        - PINGTAN MARITIME SAFETY & ISM SERVICES LTD
+        - FUZHOU OCEAN FLEET COMPLIANCE CENTER
+        - XIAMEN COASTAL TECHNICAL MANAGEMENT INC
+    mmsi:
+      one_of:
+        - 412440723
+        - 412440687
+        - 412440688
+        - 412440731
+        - 412440742
+        - 412440759
+    vessel_name:
+      one_of:
+        - FU YUAN YU YUN 993
+        - FU YUAN YU YUN 995
+        - FU YUAN YU YUN 997
+        - FU YUAN YU YUN 999
+        - FU YUAN YU YUN 1001
+    imo:
+      one_of:
+        - 9897066
+        - 9887152
+        - 9887853
+        - 9887921
+        - 9897134
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 17
+    cruise_speed_kn: 12
+    accel_kn_per_min: 1.3
+    decel_kn_per_min: 1.8
+    max_turn_deg_per_s: 0.50
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+      - fishing_sonar
+      - echosounder
+General Cargo:
+  metadata:
+    vessel_type: General Cargo
+    length_m:
+      uniform_range:
+        - 70.0
+        - 100.0
+    beam_m:
+      uniform_range:
+        - 12.0
+        - 28.0
+    call_sign:
+      one_of:
+        - VRHF6
+        - BOVS2
+        - EPBQ9
+        - 9LU2122
+        - 9LU2475
+        - 9LU2841
+    owner:
+      one_of:
+        - SHANGHAI CHANGJIANG SHIPPING
+        - OGHIAANOUS KHOROUSHAN SHIPPING
+        - NS STAR SHIPHOLDING LTD
+    manager:
+      one_of:
+        - SHANGHAI CHANGJIANG SHIPPING
+        - RAHBARAN OMID DARYA SHIP MGMT
+        - NS STAR SHIPHOLDING LTD
+    ism_manager:
+      one_of:
+        - SHANGHAI CSC LINE CO LTD
+        - RAHBARAN OMID DARYA SHIP MGMT
+    mmsi:
+      one_of:
+        - 413380840
+        - 413307520
+        - 422031400
+        - 667001319
+        - 667001672
+        - 667002038
+    vessel_name:
+      one_of:
+        - Chang Xiong
+        - CHANG ZAN
+        - Arezoo
+        - NS OLZA
+        - NS STAR
+        - NS MOON
+    imo:
+      one_of:
+        - 9553361
+        - 9916111
+        - 9165786
+        - 8919843
+        - 8905892
+        - 8919855
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 16
+    cruise_speed_kn: 12
+    accel_kn_per_min: 1.0
+    decel_kn_per_min: 1.5
+    max_turn_deg_per_s: 0.40
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+Chemical/Products Tanker:
+  metadata:
+    vessel_type: Chemical/Products Tanker
+    length_m:
+      uniform_range:
+        - 130.0
+        - 140.0
+    beam_m:
+      uniform_range:
+        - 21.0
+        - 23.0
+    call_sign:
+      one_of:
+        - 3FOB9
+        - H9KJ4
+        - VRZT8
+        - C6XW5
+    owner:
+      one_of:
+        - SHANGHAI JINGHAN SHIPPING CO
+        - EAST CHINA MARINE TRANSPORT CO
+        - PACIFIC STAR CHEMICAL CARRIERS LTD
+    manager:
+      one_of:
+        - SHANGHAI XUANRUN SHPG CO LTD
+        - BLUE OCEAN MARITIME MANAGEMENT
+    ism_manager:
+      one_of:
+        - SHANGHAI JINGHAN SHIPPING CO
+        - EAST CHINA MARINE TRANSPORT CO
+    mmsi:
+      one_of:
+        - 413376120
+        - 413452870
+        - 566215000
+    vessel_name:
+      one_of:
+        - Akadimos
+        - Pacific Orchid
+        - Ocean Jasmine
+    imo:
+      one_of:
+        - 9349095
+        - 9632254
+        - 9721143
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 18
+    cruise_speed_kn: 14
+    accel_kn_per_min: 1.0
+    decel_kn_per_min: 1.5
+    max_turn_deg_per_s: 0.30
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+car carrier:
+  metadata:
+    vessel_type: car carrier
+    call_sign:
+      one_of:
+        - BZPH4
+        - VRMK2
+        - 9HAK3
+        - V7RC8
+    owner:
+      one_of:
+        - SHENZHEN CHINA MERCHANTS RO-RO
+        - PACIFIC AUTO CARRIERS LTD
+        - EASTERN VEHICLE TRANSPORT CO
+    manager:
+      one_of:
+        - SHENZHEN CHINA MERCHANTS RO-RO
+        - OCEANLINK RO-RO MANAGEMENT PTE LTD
+    ism_manager:
+      one_of:
+        - GLOBAL VEHICLE SHIPPING ISM SERVICES
+        - MARINE SAFETY & COMPLIANCE PTE LTD
+        - OCEANLINK RO-RO MANAGEMENT PTE LTD
+    mmsi:
+      one_of:
+        - 414496000
+        - 563089210
+        - 248774331
+    vessel_name:
+      one_of:
+        - TANG HONG
+        - PACIFIC DRIVE
+        - OCEAN AUTOLINER
+        - ASIAN HIGHWAY
+    imo:
+      one_of:
+        - 9903205
+        - 9723401
+        - 9876543
+  kinematics:
+    min_speed_kn: 8
+    max_speed_kn: 21
+    cruise_speed_kn: 17
+    accel_kn_per_min: 1.0
+    decel_kn_per_min: 1.4
+    max_turn_deg_per_s: 0.30
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+Container Ship:
+  metadata:
+    vessel_type: Container Ship
+    length_m:
+      uniform_range:
+        - 70.0
+        - 304.0
+    beam_m:
+      uniform_range:
+        - 29.0
+        - 70.0
+    call_sign:
+      one_of:
+        - EPGW5
+        - EPBR9
+        - EPBR4
+        - EPGX3
+        - EPBL9
+        - EPBQ7
+        - EPBQ8
+        - EPBR3
+        - EPBR8
+        - EPBS5
+        - EPBZ3
+        - EPAK8
+    owner:
+      one_of:
+        - MOSAKHAR DARYA SHIPPING CO
+        - OGHIAANOUS KHOROUSHAN SHIPPING
+        - KISH ROARING OCEAN SHIPPING CO
+    manager:
+      one_of:
+        - RAHBARAN OMID DARYA SHIP MGMT
+        - OGHIAANOUS KHOROUSHAN SHIPPING
+    ism_manager:
+      one_of:
+        - RAHBARAN OMID DARYA SHIP MGMT
+        - HAFEZ DARYA ARYA SHIPPING CO
+    mmsi:
+      one_of:
+        - 422153500
+        - 422032300
+        - 422031700
+        - 422154200
+        - 422026900
+        - 422031200
+        - 422031300
+        - 422031600
+        - 422032200
+        - 422032700
+        - 422038800
+        - 422905000
+    vessel_name:
+      one_of:
+        - RADIN
+        - Shabgoun
+        - Zardis
+        - HAMOUNA
+        - Golbon
+        - Shabdis
+        - Behta
+        - Abyan
+        - Behnavaz
+        - Basht
+        - Artam
+        - Shahr E Kord
+    imo:
+      one_of:
+        - 9820257
+        - 9346524
+        - 9349679
+        - 9820271
+        - 9283033
+        - 9349588
+        - 9349590
+        - 9349667
+        - 9346548
+        - 9346536
+        - 9284154
+        - 9270684
+  kinematics:
+    min_speed_kn: 8
+    max_speed_kn: 24
+    cruise_speed_kn: 18
+    accel_kn_per_min: 1.2
+    decel_kn_per_min: 1.6
+    max_turn_deg_per_s: 0.35
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+Bulk Carrier:
+  metadata:
+    vessel_type: Bulk Carrier
+    length_m:
+      uniform_range:
+        - 70.0
+        - 225.0
+    beam_m:
+      uniform_range:
+        - 27.0
+        - 33.0
+    call_sign:
+      one_of:
+        - EPCB3
+        - EPBV2
+        - EPBU7
+        - EPBV4
+        - EPBV5
+        - EPBW7
+        - EPCA5
+        - EPCB4
+        - EPCB5
+        - EPEC4
+        - XVGF7
+    owner:
+      one_of:
+        - OGHIAANOUS KHOROUSHAN SHIPPING
+        - MOSAKHAR DARYA SHIPPING CO
+        - HAFEZ DARYA ARYA SHIPPING CO
+    manager:
+      one_of:
+        - RAHBARAN OMID DARYA SHIP MGMT
+    ism_manager:
+      one_of:
+        - RAHBARAN OMID DARYA SHIP MGMT
+        - SAPID SHIPPING CO
+    mmsi:
+      one_of:
+        - 422040600
+        - 422035100
+        - 422034700
+        - 422035300
+        - 422035400
+        - 422036600
+        - 422039900
+        - 422040700
+        - 422040800
+        - 422088700
+        - 574004770
+    vessel_name:
+      one_of:
+        - Kiazand
+        - Amina
+        - Termeh
+        - Ardavan
+        - Aries
+        - Mahnam
+        - Andia
+        - M V. Artaria
+        - Artavand
+        - Miami Pride
+        - GOLDEN LIGHT 09
+    imo:
+      one_of:
+        - 9465758
+        - 9305192
+        - 9213399
+        - 9465863
+        - 9369722
+        - 9213387
+        - 9193197
+        - 9226944
+        - 9193214
+        - 9274941
+        - 9445057
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 15
+    cruise_speed_kn: 12
+    accel_kn_per_min: 0.9
+    decel_kn_per_min: 1.3
+    max_turn_deg_per_s: 0.30
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
+Passenger:
+  metadata:
+    vessel_type: Passenger
+    length_m:
+      uniform_range:
+        - 65.0
+        - 75.0
+    beam_m:
+      uniform_range:
+        - 15.0
+        - 17.0
+    call_sign:
+      one_of:
+        - 5IM336
+    owner:
+      one_of:
+        - MARWARID DARYA MARINE SERVICES
+    manager:
+      one_of:
+        - MARWARID DARYA MARINE SERVICES
+    ism_manager:
+      one_of:
+        - MARWARID DARYA MARINE SERVICES
+    mmsi:
+      one_of:
+        - 677023600
+    vessel_name:
+      one_of:
+        - BLUE ROSE
+    imo:
+      one_of:
+        - 9005596
+  kinematics:
+    min_speed_kn: 6
+    max_speed_kn: 24
+    cruise_speed_kn: 18
+    accel_kn_per_min: 1.8
+    decel_kn_per_min: 2.5
+    max_turn_deg_per_s: 0.70
+  emitter_profile:
+    one_of:
+      - ais_class_a
+      - vhf_marine_bridge
+      - nav_radar_x_band
+      - nav_radar_s_band
+      - satcom_maritime_c_ku
+      - arpa_tracking_uplink
