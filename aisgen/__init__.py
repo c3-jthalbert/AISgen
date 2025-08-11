@@ -6,7 +6,7 @@ Primary usage is in notebooks.
 """
 from .environment import AOIEnvironment
 from .vessel import VesselTemplate
-from .tracks import TrackGenerator, TrackBuilder
+from .tracks import TrackGenerator
 from .utils import snap_polyline_to_poisson, random_poisson_in_polygon  # if present
 
 __all__ = [

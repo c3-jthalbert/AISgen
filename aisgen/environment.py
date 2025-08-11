@@ -217,7 +217,13 @@ class AOIEnvironment:
         # Back to WGS84 + finalize
         out = inter_m.to_crs("EPSG:4326").reset_index(drop=True)
         out["cell_id"] = out.index
-        self.partition_gdf = out[["cell_id", "is_boundary", "is_port", "geometry"]]
+        # Compute centroids in projected coords for accuracy
+        centroids_proj = inter_m.centroid  # inter_m is still in UTM here
+        centroids_wgs84 = centroids_proj.to_crs("EPSG:4326")
+        
+        out["centroid_x"] = centroids_wgs84.x
+        out["centroid_y"] = centroids_wgs84.y
+        self.partition_gdf = out[["cell_id", "is_boundary",  "centroid_x", "centroid_y","is_port", "geometry"]]
         return self.partition_gdf
 
     # ---------------

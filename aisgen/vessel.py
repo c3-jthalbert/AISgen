@@ -43,7 +43,7 @@ def _resolve_value(spec: Any, rng: random.Random) -> Any:
     if _is_one_of_spec(spec):
         choices = spec["one_of"]
         if not choices:
-            raise ValueError("one_of list is empty.")
+            return ""
         choice = rng.choice(choices)
         return _resolve_value(choice, rng)
 

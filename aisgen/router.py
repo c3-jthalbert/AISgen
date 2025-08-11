@@ -163,6 +163,11 @@ class HeadingAwareAStar:
 
     def _bin(self, heading_deg: float) -> int:
         return int(round((heading_deg % 360.0) / self.bin_size)) % int(360.0 / self.bin_size)
+    
+    def heading_bin_for_edge(self, u: int, v: int) -> int:
+        """Return the heading bin index for the edge u→v."""
+        bearing = self._bearing_uv(u, v)
+        return self._bin(bearing)
 
     def _bin_center(self, b: int) -> float:
         return (b + 0.5) * self.bin_size
@@ -192,40 +197,55 @@ class HeadingAwareAStar:
         goal_node: int,
         allowed_nodes_mask: Optional[np.ndarray] = None,
         max_expansions: int = 500000,
+        initial_heading_bin: Optional[int] = None,  # NEW
     ) -> List[int]:
-        """Return a list of node ids from start to goal (inclusive). Raises if not found."""
+        """Return a list of node ids from start to goal (inclusive).
+        Raises if not found.
+    
+        Parameters
+        ----------
+        start_node : int
+            Node ID in Poisson graph for start
+        goal_node : int
+            Node ID in Poisson graph for goal
+        allowed_nodes_mask : np.ndarray[bool], optional
+            Mask of allowed nodes in the search
+        max_expansions : int
+            Limit on number of expansions before abort
+        initial_heading_bin : int or None
+            If given, forces the first expansion to assume this heading bin
+            for turn-rate continuity from a previous leg
+        """
         if allowed_nodes_mask is not None:
             if not allowed_nodes_mask[start_node] or not allowed_nodes_mask[goal_node]:
                 raise ValueError("Start/goal not in corridor; widen corridor_km or re-anchor.")
         Nbins = int(360.0 / self.bin_size)
-
+    
         # Priority queue of (f, g, node, heading_bin_or_None)
         openq: List[Tuple[float, float, int, Optional[int]]] = []
-        # g-costs and backpointers keyed by (node, bin)
         gbest: Dict[Tuple[int, Optional[int]], float] = {}
         parent: Dict[Tuple[int, Optional[int]], Tuple[int, Optional[int]]] = {}
-
+    
         def h(node: int) -> float:
             # straight-line great-circle distance to goal in km
             n1, n2 = self.Gp.nodes[node], self.Gp.nodes[goal_node]
             return _gc_km((n1["lon"], n1["lat"]), (n2["lon"], n2["lat"]))
-
-        start_state = (start_node, None)  # None means "no prior heading"
+    
+        start_state = (start_node, initial_heading_bin)  # USE initial_heading_bin if provided
         gbest[start_state] = 0.0
-        heapq.heappush(openq, (h(start_node), 0.0, start_node, None))
-
+        heapq.heappush(openq, (h(start_node), 0.0, start_node, initial_heading_bin))
+    
         expansions = 0
         visited = set()
-
+    
         while openq:
             f, g, u, hb = heapq.heappop(openq)
             state = (u, hb)
             if state in visited:
                 continue
             visited.add(state)
-
+    
             if u == goal_node:
-                # reconstruct path by ignoring heading bins (take the first goal we pop)
                 path_nodes: List[int] = [u]
                 cur = state
                 while cur in parent:
@@ -233,21 +253,19 @@ class HeadingAwareAStar:
                     path_nodes.append(cur[0])
                 path_nodes.reverse()
                 return path_nodes
-
+    
             if expansions > max_expansions:
                 break
             expansions += 1
-
-            # Neighbor expansion
+    
             for v in self.Gp.neighbors(u):
                 if allowed_nodes_mask is not None and not allowed_nodes_mask[v]:
                     continue
                 s_km = self._edge_len_km(u, v)
                 if s_km <= 1e-6:
                     continue
-
+    
                 new_heading = self._bearing_uv(u, v)
-                # If we have a prior heading bin, enforce feasibility and compute penalty
                 if hb is None:
                     d_heading = 0.0
                     penalty = 0.0
@@ -259,7 +277,7 @@ class HeadingAwareAStar:
                         continue
                     penalty = self.p.turn_penalty_lambda * (d_heading * d_heading) * 1e-3
                     nb = self._bin(new_heading)
-
+    
                 g2 = g + s_km + penalty
                 st2 = (v, nb)
                 if g2 < gbest.get(st2, float("inf")):
@@ -267,5 +285,5 @@ class HeadingAwareAStar:
                     parent[st2] = state
                     f2 = g2 + h(v)
                     heapq.heappush(openq, (f2, g2, v, nb))
-
+    
         raise RuntimeError("A* failed to find a path under the given constraints.")
