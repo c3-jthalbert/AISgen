@@ -212,6 +212,8 @@ class TrackGenerator:
 
     def random_track(self, vessel_template: VesselTemplate, **kwargs) -> Tuple[Dict[str, Any], pd.DataFrame]:
         vessel = vessel_template.sample(int(self.rng.integers(0, 2**32 - 1)))
+        if getattr(vessel, "emitter_profile", None) is None:
+            raise ValueError(f"Emitter profile missing right after sampling from {vessel_template.name}")
         return self._random_track_instance(vessel, **kwargs)
 
     def _random_track_instance(

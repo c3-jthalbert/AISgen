@@ -7,6 +7,12 @@ import geopandas as gpd
 from shapely.geometry import LineString, Point, Polygon
 from scipy.spatial import cKDTree
 from pyproj import Geod
+from pathlib import Path
+from .environment import AOIEnvironment
+from .tracks import TrackGenerator
+from .vessel import load_vessel_templates
+
+
 
 _GEOD = Geod(ellps="WGS84")
 
@@ -179,3 +185,66 @@ def random_poisson_in_polygon(env, polygon: Polygon, rng: Optional[np.random.Gen
     # fallback
     c = polygon.centroid
     return float(c.x), float(c.y)
+
+
+def setup_aisgen_environment(
+    aoi_geojson: str,
+    mask_geojson: Optional[str] = None,
+    poisson_radius_deg: float = 0.02,
+    seed: int = 42,
+    target_cells: Optional[int] = 60,
+    cell_width_m: Optional[float] = None,
+    vessel_templates_yaml: Optional[str] = None
+) -> Tuple[AOIEnvironment, TrackGenerator, Dict]:
+    """
+    Initialize AOIEnvironment, TrackGenerator, and vessel templates for AISgen.
+
+    Args:
+        aoi_geojson: Path to AOI GeoJSON file.
+        mask_geojson: Optional mask GeoJSON to exclude (e.g., land or restricted areas).
+        poisson_radius_deg: Minimum spacing for Poisson-disk sample points (in degrees).
+        seed: RNG seed for reproducibility.
+        target_cells: Desired number of grid cells (mutually exclusive with cell_width_m).
+        cell_width_m: Desired grid cell width in meters (mutually exclusive with target_cells).
+        vessel_templates_yaml: Optional path to vessel templates YAML. If None, uses the default
+                               AISgen/data/vessel_class_templates.yaml.
+
+    Returns:
+        env: AOIEnvironment instance
+        cells: GDF of grid partition for adjustment if necessary
+        tg: TrackGenerator bound to env
+        templates: dict of VesselTemplate objects
+    """
+    # --- Resolve default YAML path ---
+    if vessel_templates_yaml is None:
+        vessel_templates_yaml = Path(__file__).resolve().parent.parent / "data" / "vessel_class_templates.yaml"
+
+    # --- Initialize environment ---
+    env = AOIEnvironment.from_geojson(
+        aoi_geojson,
+        mask_geojson,
+        poisson_radius_deg=poisson_radius_deg,
+        seed=seed,
+    )
+
+    # --- Build grid partition ---
+    if target_cells is not None:
+        cells = env.build_grid_partition(target_cells=target_cells)
+    elif cell_width_m is not None:
+        cells = env.build_grid_partition(cell_width_m=cell_width_m)
+    else:
+        raise ValueError("Provide either target_cells or cell_width_m.")
+
+    # --- Build graphs ---
+    env.build_graph()
+    env.generate_poisson_points()
+    env.build_poisson_graph()
+
+    # --- Track generator ---
+    tg = TrackGenerator(env)
+
+    # --- Vessel templates ---
+    templates = load_vessel_templates(str(vessel_templates_yaml))
+
+    return env,cells, tg, templates
+
